@@ -1,10 +1,19 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+// import { AppController } from './app.controller';
+// import { AppService } from './app.service';
+import { ConfigModule } from '@nestjs/config';
+import { PiperxModule } from './modules/piperx/piperx.module';
+import { AppConfigModule } from './config/config.module';
+import { StoryhuntModule } from './modules/storyhunt/storyhunt.module';
+import { ArbitrageModule } from './modules/arbitrage/arbitrage.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }), // Load biến môi trường từ .env
+    AppConfigModule,
+    PiperxModule,
+    StoryhuntModule,
+    ArbitrageModule,
+  ],
 })
 export class AppModule {}
